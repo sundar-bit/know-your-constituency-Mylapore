@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Know Your Constituency — Mylapore</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0F0D0A;
+    --bg2:      #1A1712;
+    --bg3:      #242018;
+    --border:   #2E2A22;
+    --ink:      #F0EBE0;
+    --muted:    #B0A898;
+    --faint:    #3A352C;
+    --gold:     #D4A843;
+    --gold-dim: #7A5F20;
+    --hl:       #2DC98E;
+    --hl-dim:   #0E4A32;
+    --hl-card:  #0D1F18;
+    --ll:       #F05A5A;
+    --ll-dim:   #4A1212;
+    --ll-card:  #1F0D0D;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    background: var(--gold);
+    color: #1A0F00;
+    text-align: center;
+    padding: 9px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,168,67,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; width: 48px; height: 1px; background: var(--gold-dim);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900; line-height: 1.0; letter-spacing: -2px;
+    color: var(--ink); margin-bottom: 10px;
+  }
+  .hero h1 .hl-word { color: var(--hl); }
+  .hero h1 .ll-word { color: var(--ll); }
+  .hero-sub {
+    font-size: 16px; color: var(--muted); max-width: 580px;
+    margin: 0 auto 32px; line-height: 1.65;
+  }
+  .hero-pills {
+    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+  }
+  .hero-pill {
+    padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
+    border: 1px solid var(--border); color: var(--muted); background: var(--bg3);
+  }
+
+  /* ── Score strip ── */
+  .score-strip {
+    display: flex; justify-content: center; flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+  }
+  .score-item {
+    padding: 16px 28px; text-align: center;
+    border-right: 1px solid var(--border); min-width: 110px;
+    position: relative;
+  }
+  .score-item:last-child { border-right: none; }
+  .s-val {
+    font-family: 'Fraunces', serif;
+    font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1;
+  }
+  .s-label {
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); margin-top: 4px;
+  }
+
+  /* ── Wrapper ── */
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* Intro */
+  .intro {
+    max-width: 700px; margin: 48px auto 52px;
+    font-size: 17px; line-height: 1.8; color: #BDB5A8;
+    text-align: center;
+  }
+  .intro strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Section header ── */
+  .sec-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 24px;
+  }
+  .sec-badge {
+    font-family: 'Fraunces', serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px;
+    padding: 6px 18px; border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .sec-badge.hl { background: var(--hl); color: #001A0D; }
+  .sec-badge.ll { background: var(--ll); color: #1A0000; }
+  .sec-line { flex: 1; height: 1px; }
+  .sec-line.hl { background: linear-gradient(to right, var(--hl-dim), transparent); }
+  .sec-line.ll { background: linear-gradient(to right, var(--ll-dim), transparent); }
+  .sec-count { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+  /* ── Cards grid ── */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
+
+  /* ── Card ── */
+  .card {
+    border-radius: 10px; border: 1px solid var(--border);
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform 0.18s, border-color 0.18s;
+    cursor: default;
+  }
+  .card:hover { transform: translateY(-3px); }
+  .card.hl { background: var(--hl-card); }
+  .card.hl:hover { border-color: var(--hl-dim); }
+  .card.ll { background: var(--ll-card); }
+  .card.ll:hover { border-color: var(--ll-dim); }
+
+  .card-stripe { height: 3px; }
+  .card.hl .card-stripe { background: var(--hl); }
+  .card.ll .card-stripe { background: var(--ll); }
+
+  .card-inner { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; }
+
+  .card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+
+  .card-badge {
+    font-family: 'Fraunces', serif;
+    font-size: 12px; font-weight: 700;
+    padding: 3px 9px; border-radius: 4px;
+    flex-shrink: 0; letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+  .card.hl .card-badge { background: var(--hl-dim); color: var(--hl); }
+  .card.ll .card-badge { background: var(--ll-dim); color: var(--ll); }
+
+  .card-icon-title { flex: 1; }
+  .card-icon { font-size: 22px; margin-bottom: 6px; line-height: 1; }
+  .card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--ink); line-height: 1.3;
+  }
+
+  .card-stat {
+    font-family: 'Fraunces', serif;
+    font-size: 36px; font-weight: 900; line-height: 1;
+    margin-bottom: 4px;
+  }
+  .card.hl .card-stat { color: var(--hl); }
+  .card.ll .card-stat { color: var(--ll); }
+  .card-stat-sub { font-size: 11px; color: #B8B0A4; letter-spacing: 0.5px; margin-bottom: 12px; }
+
+  .card-body {
+    font-size: 13.5px; line-height: 1.75; color: #D0C8BC; flex: 1;
+  }
+
+  .data-tag {
+    margin-top: 14px; padding: 10px 13px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 6px;
+    font-size: 12px; line-height: 1.6;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .data-tag .dt-label {
+    font-weight: 700; color: #D4A843; flex-shrink: 0; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 1px; padding-top: 1px;
+  }
+  .data-tag .dt-val { color: #D6CFC4; }
+
+  /* ── Pullquote ── */
+  .pullquote {
+    max-width: 700px; margin: 56px auto;
+    padding: 36px 40px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    position: relative;
+  }
+  .pullquote::before {
+    content: '\201C';
+    font-family: 'Fraunces', serif;
+    font-size: 80px; color: var(--gold-dim); line-height: 1;
+    position: absolute; top: 8px; left: 28px;
+  }
+  .pullquote p {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-style: italic; color: var(--ink);
+    line-height: 1.55; padding-left: 32px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex; align-items: center; gap: 14px;
+    margin: 56px 0 40px;
+  }
+  .divider::before, .divider::after { content:''; flex:1; height:1px; background: var(--border); }
+  .divider span {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--faint); white-space: nowrap;
+  }
+
+  /* ── Verdict ── */
+  .verdict {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    border-radius: 0 0 10px 10px;
+    padding: 36px 40px;
+    max-width: 760px; margin: 56px auto 0;
+  }
+  .verdict-eyebrow {
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 10px;
+  }
+  .verdict h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px; font-weight: 700; color: var(--ink);
+    margin-bottom: 16px; line-height: 1.3;
+  }
+  .verdict p { font-size: 15px; color: #C8BEB0; line-height: 1.8; margin-bottom: 12px; }
+  .verdict p:last-child { margin-bottom: 0; }
+  .verdict strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Scoretable ── */
+  .score-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+  .score-table td { padding: 7px 0; border-bottom: 1px solid var(--border); color: #C8BEB0; }
+  .score-table td:first-child { color: var(--ink); font-weight: 500; }
+  .score-table td:last-child { text-align: right; }
+  .score-table tr:last-child td { border-bottom: none; }
+
+  /* ── Ask Your Candidate ── */
+  .ayc-section { margin-top: 64px; }
+  .ayc-banner {
+    background: linear-gradient(135deg, #1A0F2E 0%, #0D1A2E 100%);
+    border: 1px solid #3A2860; border-top: 4px solid #A855F7;
+    border-radius: 10px 10px 0 0; padding: 32px 40px 24px; text-align: center;
+  }
+  .ayc-election-tag {
+    display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: #A855F7;
+    border: 1px solid #6B21A8; padding: 4px 14px; border-radius: 20px;
+    margin-bottom: 14px; background: rgba(168,85,247,0.1);
+  }
+  .ayc-banner h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 4vw, 42px); font-weight: 900; color: #F0EBE0;
+    letter-spacing: -1px; margin-bottom: 8px; line-height: 1.1;
+  }
+  .ayc-banner h2 span { color: #A855F7; }
+  .ayc-banner p { font-size: 15px; color: #C8C0B4; max-width: 620px; margin: 0 auto; line-height: 1.6; }
+  .ayc-timer {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 16px; padding: 6px 16px; border-radius: 20px;
+    background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3);
+    font-size: 12px; font-weight: 600; color: #C084FC; letter-spacing: 0.5px;
+  }
+  .ayc-tabs { display: flex; border-bottom: 1px solid var(--border); background: #120D1E; }
+  .ayc-tab {
+    flex: 1; padding: 14px 12px; text-align: center; cursor: pointer;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+    border: none; background: none; transition: all 0.2s;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .ayc-tab .t-emoji { font-size: 18px; }
+  .ayc-tab .t-label { color: var(--muted); }
+  .ayc-tab .t-sub { font-size: 10px; color: var(--faint); letter-spacing: 0.3px; }
+  .ayc-tab.active .t-label { color: #F0EBE0; }
+  .ayc-tab:nth-child(1).active { border-bottom: 3px solid #F97316; }
+  .ayc-tab:nth-child(2).active { border-bottom: 3px solid #3B82F6; }
+  .ayc-tab:nth-child(3).active { border-bottom: 3px solid #10B981; }
+  .ayc-content {
+    background: #120D1E; border: 1px solid #3A2860; border-top: none;
+    border-radius: 0 0 10px 10px; padding: 28px 32px 36px;
+  }
+  .tier-panel { display: none; }
+  .tier-panel.active { display: block; }
+  .tier-intro {
+    font-size: 14px; color: #C8C0B4; line-height: 1.7;
+    border-left: 3px solid; padding-left: 14px; margin-bottom: 28px;
+  }
+  .tier-intro.low { border-color: #F97316; }
+  .tier-intro.mid { border-color: #3B82F6; }
+  .tier-intro.high { border-color: #10B981; }
+  .ask-list { display: flex; flex-direction: column; gap: 14px; }
+  .ask-item {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-left: 3px solid; border-radius: 0 8px 8px 0;
+    padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .ask-item.low  { border-left-color: #F97316; }
+  .ask-item.mid  { border-left-color: #3B82F6; }
+  .ask-item.high { border-left-color: #10B981; }
+  .ask-item.all  { border-left-color: #A855F7; }
+  .ask-num {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 900;
+    line-height: 1; flex-shrink: 0; width: 28px; padding-top: 2px;
+  }
+  .low  .ask-num { color: #F97316; }
+  .mid  .ask-num { color: #3B82F6; }
+  .high .ask-num { color: #10B981; }
+  .all  .ask-num { color: #A855F7; }
+  .ask-body { flex: 1; }
+  .ask-title { font-weight: 600; font-size: 15px; color: #F0EBE0; margin-bottom: 5px; line-height: 1.35; }
+  .ask-desc  { font-size: 13px; color: #C0B8AC; line-height: 1.7; }
+  .ask-tag {
+    display: inline-block; margin-top: 7px; font-size: 10px; font-weight: 600;
+    padding: 2px 9px; border-radius: 4px; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .ask-tag.urgent { background: rgba(239,68,68,0.15);   color: #F87171; }
+  .ask-tag.infra  { background: rgba(59,130,246,0.15);  color: #60A5FA; }
+  .ask-tag.social { background: rgba(249,115,22,0.15);  color: #FB923C; }
+  .ask-tag.policy { background: rgba(168,85,247,0.15);  color: #C084FC; }
+  .ask-tag.green  { background: rgba(16,185,129,0.15);  color: #34D399; }
+  .shared-asks { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .shared-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #A855F7; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+  }
+  .shared-label::after { content:''; flex:1; height:1px; background: rgba(168,85,247,0.2); }
+  .ayc-cta {
+    margin-top: 24px; padding: 20px 24px;
+    background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 8px; text-align: center;
+  }
+  .ayc-cta p { font-size: 14px; color: #C084FC; line-height: 1.7; }
+  .ayc-cta strong { color: #F0EBE0; }
+
+  /* ── Footer ── */
+  .footer {
+    border-top: 1px solid var(--border); padding: 28px 20px 48px;
+    max-width: 1060px; margin: 0 auto;
+    font-size: 11.5px; color: var(--muted); line-height: 1.9;
+  }
+  .footer strong { color: #B0A898; }
+
+  /* Animations */
+  @keyframes rise { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  .card { opacity:0; animation: rise 0.5s ease forwards; }
+  .grid:nth-of-type(1) .card:nth-child(1) { animation-delay:.06s }
+  .grid:nth-of-type(1) .card:nth-child(2) { animation-delay:.12s }
+  .grid:nth-of-type(2) .card:nth-child(1) { animation-delay:.18s }
+  .grid:nth-of-type(2) .card:nth-child(2) { animation-delay:.24s }
+  .grid:nth-of-type(3) .card:nth-child(1) { animation-delay:.30s }
+  .grid:nth-of-type(3) .card:nth-child(2) { animation-delay:.36s }
+  .grid:nth-of-type(4) .card:nth-child(1) { animation-delay:.06s }
+  .grid:nth-of-type(4) .card:nth-child(2) { animation-delay:.12s }
+  .grid:nth-of-type(5) .card:nth-child(1) { animation-delay:.18s }
+  .grid:nth-of-type(5) .card:nth-child(2) { animation-delay:.24s }
+  .grid:nth-of-type(6) .card:nth-child(1) { animation-delay:.30s }
+  .grid:nth-of-type(6) .card:nth-child(2) { animation-delay:.36s }
+</style>
+</head>
+<body>
+
+<div class="topbar">Know Your Constituency &nbsp;·&nbsp; Open City Data Jam 2026 &nbsp;·&nbsp; Chennai</div>
+
+<div style="
+  background: #1A3A1A;
+  border-bottom: 1px solid #2A5A2A;
+  padding: 10px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: #A8C8A8;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+">
+  ⚖️ &nbsp;<strong style="color:#C8E8C8;">Non-partisan notice:</strong>
+  This report does not endorse or oppose any political party or candidate.
+  All data is sourced from public datasets on OpenCity.in and is presented
+  solely for civic awareness ahead of the 2026 Tamil Nadu Assembly Elections.
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow" style="font-size:16px;letter-spacing:5px;">Know Your Constituency</div>
+  <h1 style="font-size:clamp(52px,9vw,100px);letter-spacing:-3px;margin-bottom:4px;">
+    <span style="color:var(--gold)">Mylapore</span>
+  </h1>
+  <h2 style="font-family:'Fraunces',serif;font-size:clamp(22px,4vw,40px);font-weight:700;letter-spacing:-0.5px;margin-bottom:18px;color:var(--ink);opacity:0.85;">
+    <span class="hl-word">Highlights</span> &amp; <span class="ll-word">Lowlights</span>
+  </h2>
+  <p class="hero-sub">Twenty data-backed findings on Chennai's second-ranked constituency — what it gets right, and where it quietly fails its 1.91 lakh residents</p>
+  <p style="font-size:13px;color:var(--gold);font-weight:600;letter-spacing:1px;margin-bottom:20px;">
+    Prepared by Dr. Sundararaman Chintamani
+  </p>
+  <div class="hero-pills">
+    <span class="hero-pill">Rank 2 of 18</span>
+    <span class="hero-pill">Score 78 / 100</span>
+    <span class="hero-pill">191,400 Voters</span>
+    <span class="hero-pill">South Chennai</span>
+    <span class="hero-pill">10 Highlights · 10 Lowlights</span>
+  </div>
+</div>
+
+<div class="score-strip">
+  <div class="score-item"><div class="s-val">78</div><div class="s-label">Overall</div></div>
+  <div class="score-item"><div class="s-val">79</div><div class="s-label">Health</div></div>
+  <div class="score-item"><div class="s-val">81</div><div class="s-label">Education</div></div>
+  <div class="score-item"><div class="s-val">73</div><div class="s-label">Flood Safety</div></div>
+  <div class="score-item"><div class="s-val">81</div><div class="s-label">Transport</div></div>
+  <div class="score-item"><div class="s-val">75</div><div class="s-label">Civic</div></div>
+</div>
+
+<div class="wrap">
+
+  <p class="intro">
+    No constituency in Chennai is all good or all bad. Mylapore — ancient, dense, proud — is a study in contrasts. It <strong>leads the city in civic spirit, health access, and school staffing.</strong> It also floods every monsoon, taxes its residents heavily and returns less than it should, and is slowly being hollowed out by demographic change. Here are ten of each.
+  </p>
+
+  <div style="
+    display: flex; align-items: flex-start; gap: 14px;
+    background: rgba(212,168,67,0.07);
+    border: 1px solid rgba(212,168,67,0.25);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 0 auto 44px;
+    max-width: 760px;
+  ">
+    <span style="font-size:20px; flex-shrink:0; margin-top:2px;">🏛</span>
+    <div>
+      <div style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:6px;">A note on scope</div>
+      <p style="font-size:14px; color:#C8C0B4; line-height:1.75; margin:0;">
+        Mylapore is rightly celebrated for the <strong style="color:#F0EBE0">Kapaleeshwarar temple</strong>, its <strong style="color:#F0EBE0">December music sabhas</strong>, the <strong style="color:#F0EBE0">Margazhi season</strong>, its ancient <strong style="color:#F0EBE0">temples, theerthams, and cultural traditions</strong> that make it the spiritual heart of Chennai. None of that is in this report — and intentionally so. This is a <strong style="color:#F0EBE0">civic data report</strong>: it covers health, education, flooding, transport, and governance — the metrics that affect daily quality of life and can be measured, compared, and demanded from elected representatives. Mylapore's cultural heritage is its soul. This report is about its roads, drains, and schools.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════════ HIGHLIGHTS ══════════ -->
+
+  <div class="sec-header">
+    <span class="sec-badge hl">✦ Highlights</span>
+    <div class="sec-line hl"></div>
+    <span class="sec-count">10 things Mylapore gets right</span>
+  </div>
+
+  <div class="grid">
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H1</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🗳</div>
+            <div class="card-title">Highest voter turnout in all of Chennai</div>
+          </div>
+        </div>
+        <div class="card-stat">71.6%</div>
+        <div class="card-stat-sub">vs city average of 63.4%</div>
+        <p class="card-body">In the 2021 TN Assembly elections, Mylapore recorded the highest turnout of all 18 constituencies. This is not a fluke — it reflects a deeply rooted culture of civic participation that spans generations and makes this constituency a model for democratic engagement.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">TN Assembly Elections 2021 (OpenCity.in) · Civic score: 75/100 — Rank 1 in Chennai</span></div>
+      </div>
+    </div>
+
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H2</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🏥</div>
+            <div class="card-title">Five Urban Primary Health Centres (Urban Primary Health Centre (UPHC)s) — best health access ratio in South Chennai</div>
+          </div>
+        </div>
+        <div class="card-stat">5</div>
+        <div class="card-stat-sub">Urban Primary Health Centres · 1 per ~38,000 residents</div>
+        <p class="card-body">With 5 UPHCs for 191,400 voters, Mylapore is among the top 4 constituencies citywide on health centre density. Compare to Royapuram and Sholinganallur — each with just 2 UPHCs for larger populations.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Greater Chennai Corporation (GCC) UPHCs & Urban Community Health Centres (Urban Community Health Centre (UCHC)s) map (OpenCity.in) · Health score: 79/100</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H3</span>
+          <div class="card-icon-title">
+            <div class="card-icon">📚</div>
+            <div class="card-title">Best pupil-teacher ratio — tied with Anna Nagar at top</div>
+          </div>
+        </div>
+        <div class="card-stat">23:1</div>
+        <div class="card-stat-sub">Pupil-Teacher Ratio (PTR) in govt schools · WHO recommends ≤ 30:1</div>
+        <p class="card-body">Children in Mylapore's government schools get far more individual teacher attention than anywhere else in the city. The worst in Chennai — Sholinganallur at 44:1 — means kids there get nearly half the teacher time per student.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Unified District Information System for Education Plus (Unified District Information System for Education (UDISE)+) 2023-24 · Education score: 81/100 · Rank 3 overall</span></div>
+      </div>
+    </div>
+
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H4</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🚌</div>
+            <div class="card-title">35 Metropolitan Transport Corporation (MTC) bus stops — second most in Chennai after Egmore</div>
+          </div>
+        </div>
+        <div class="card-stat">35</div>
+        <div class="card-stat-sub">Bus shelters · City median: 24 · Plus metro access</div>
+        <p class="card-body">Combined with metro access via Alwarpet and Teynampet stations and Mass Rapid Transit System (MRTS) along the coast, Mylapore residents have genuine multi-modal transport options. Only 9 of 18 constituencies have metro access at all.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Bus Shelters dataset · Metro Monthly Usage · Transport score: 81/100</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H5</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🌿</div>
+            <div class="card-title">Adyar Estuary & temple tanks — a rare urban biodiversity asset</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">The Adyar River and estuary along Mylapore's southern edge is one of Chennai's most ecologically significant wetland systems. Multiple temple tanks — Kapali, Kesava Perumal — act as groundwater recharge points. The City Biodiversity Index designates this corridor as ecologically sensitive and a natural flood buffer.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai City Biodiversity Index · Waterbodies dataset · Master Plan 2026 (OpenCity.in)</span></div>
+      </div>
+    </div>
+
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H6</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🏛</div>
+            <div class="card-title">Strongest resident voice infrastructure — active Resident Welfare Associations (Resident Welfare Association (RWA)s) & citizen manifestos</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Mylapore has multiple functioning RWAs and the Mylapore Times — a neighbourhood community news platform covering civic issues. Formal citizen manifestos have been submitted ahead of the 2026 elections, making this one of the most organised constituencies for accountability in the entire city.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Citizen Manifestos for TN Elections 2026 · Ward Committee records (OpenCity.in)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H7</span>
+          <div class="card-icon-title">
+            <div class="card-icon">💧</div>
+            <div class="card-title">More consistent water supply than North Chennai peers</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Zone-wise water supply data shows South Chennai, including Mylapore, receives more consistent piped water than North Chennai constituencies like Thiruvottiyur and Royapuram which face chronic shortages. Chennai Metropolitan Water Supply and Sewerage Board (CMWSSB)'s distribution network is more mature and reliable in this zone.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Water Supply dataset · CMWSSB GIS · Ward-wise Groundwater Levels (OpenCity.in)</span></div>
+      </div>
+    </div>
+
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H8</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🏪</div>
+            <div class="card-title">High commercial density drives one of the stronger ward tax bases</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Luz Church Road, San Thome High Road, and R.A. Puram make Mylapore's wards among the higher property-tax contributing zones in South Chennai. This means the constituency funds more GCC services than most peers — making its infrastructure return gap (see L8) all the more unjustifiable.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Property Tax Collections (ward-wise till 2017-18) · GCC Budget 2025-26 (OpenCity.in)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H9</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🌳</div>
+            <div class="card-title">Above-average parks & open space for a dense urban constituency</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Nageswara Rao Park, the Marina Green, and multiple neighbourhood open spaces give Mylapore a green per-capita ratio higher than comparable dense areas like Royapuram or Perambur. These spaces serve as informal community hubs and critical urban cooling islands.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Parks dataset · Master Plan 2026 open space designations (OpenCity.in)</span></div>
+      </div>
+    </div>
+
+    <div class="card hl">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">H10</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🚇</div>
+            <div class="card-title">Metro access gives a long-term transit dividend as the network expands</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Only 9 of 18 constituencies have metro access today. Mylapore is one. As Chennai Metro Rail Limited (CMRL) Phase 2 expands the network southward, Mylapore's connectivity advantage will compound — a structural asset for residents, businesses, and property values that most of Chennai cannot yet claim.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Metro Monthly Usage · MRTS Data · Comprehensive Mobility Plan (OpenCity.in)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- pullquote -->
+  <div class="pullquote">
+    <p>Mylapore leads Chennai in civic voice. Its residents vote the most, organise the best, and file the most detailed manifestos. The tragedy is that this civic capital has not yet been converted into proportionate infrastructure quality.</p>
+  </div>
+
+  <div class="divider"><span>Lowlights</span></div>
+
+  <!-- ══════════ LOWLIGHTS ══════════ -->
+
+  <div class="sec-header">
+    <span class="sec-badge ll">✦ Lowlights</span>
+    <div class="sec-line ll"></div>
+    <span class="sec-count">10 things Mylapore needs to fix</span>
+  </div>
+
+  <div class="grid">
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L1</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🌊</div>
+            <div class="card-title">Flood safety score of 73 — the single gap preventing Rank 1</div>
+          </div>
+        </div>
+        <div class="card-stat">−10</div>
+        <div class="card-stat-sub">Points behind Anna Nagar on flood safety (73 vs 83)</div>
+        <p class="card-body">Buckingham Canal, R.A. Puram pockets, and low-lying lanes near the coast flood every northeast monsoon. This 10-point flood deficit is mathematically what keeps Mylapore at Rank 2. Fix the drains, fix the rank.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Flooding Inundation dataset · Floods 2015 & 2020 data (OpenCity.in)</span></div>
+      </div>
+    </div>
+
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L2</span>
+          <div class="card-icon-title">
+            <div class="card-icon">⚡</div>
+            <div class="card-title">Sewerage network at capacity — floods mixed with sewage in 2020</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">The Sewerage Capacity dataset shows the Mylapore–Mandaveli zone operates near saturation during peak monsoon. In 2020, primary sewers and the Buckingham Canal overflowed simultaneously — a public health emergency. A proposed relief sewer for Mandaveli–Santhome remains unfunded in the GCC Budget 2025-26.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Sewerage Capacity map · Sewage Collection System KML · Floods 2020 data (OpenCity.in)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L3</span>
+          <div class="card-icon-title">
+            <div class="card-icon">📉</div>
+            <div class="card-title">Shrinking electorate — 5th smallest in Chennai, demographic hollowing</div>
+          </div>
+        </div>
+        <div class="card-stat">1.91L</div>
+        <div class="card-stat-sub">Voters · Below city median of 2.14L · Stagnant while others grow</div>
+        <p class="card-body">Rising property prices are pushing young families to the suburbs, slowly hollowing out Mylapore's working-age population. While Velachery has 2.67L voters and Sholinganallur 2.54L and growing, Mylapore's voter roll is static.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Voter Rolls Jan 2025 · NSS Multi-Indicator Survey 2020-21 (OpenCity.in)</span></div>
+      </div>
+    </div>
+
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L4</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🚶</div>
+            <div class="card-title">Poor last-mile to metro — especially for women & elderly after 9 PM</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Despite metro access, pedestrian infrastructure between Mylapore's interior lanes and Alwarpet/Teynampet stations is inadequate — broken footpaths, no shelter, poor lighting. Feeder bus frequency collapses after 9 PM, a critical gap for women commuters and the elderly.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Comprehensive Mobility Plan · MTC Performance Data · Bus Shelters dataset (OpenCity.in)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L5</span>
+          <div class="card-icon-title">
+            <div class="card-icon">💸</div>
+            <div class="card-title">Pays high property taxes — infrastructure return lags contribution</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Mylapore wards are among South Chennai's highest GCC tax contributors. Yet residents consistently report that road resurfacing, drain desilting, and footpath quality are below what their contribution should deliver. This fiscal mismatch is unquantified and rarely challenged in ward committee meetings.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Property Tax Collections (till 2017-18) · GCC Budget 2025-26 (OpenCity.in)</span></div>
+      </div>
+    </div>
+
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L6</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🌡</div>
+            <div class="card-title">Rising urban heat island — high density, declining tree cover</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Land Surface Temperature (LST) data for May–June 2025 shows Mylapore's dense zones recording surface temperatures 3–5°C above the city's greener areas. Normalised Difference Vegetation Index (NDVI) data confirms declining tree cover in Mandaveli and R.A. Puram as buildings replace garden plots. Urban heat stress is a growing but invisible health hazard.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">LST Geotiff May–Jun 2025 · NDVI 2025 · Normalised Difference Built-up Index (NDBI) 2025 Built-up Index (Data Jam datasets)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L7</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🏫</div>
+            <div class="card-title">School facility quality lags — labs, digital access & toilets are gaps</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">A good PTR of 23:1 masks physical infrastructure shortcomings. UDISE+ data flags gaps in science lab availability, digital classroom access, and functional toilet ratios in Mylapore's government schools. Good teacher staffing alone does not equal quality education.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">UDISE+ 2023-24 · UDISE+ 2021-22 · Chennai Schools map (OpenCity.in)</span></div>
+      </div>
+    </div>
+
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L8</span>
+          <div class="card-icon-title">
+            <div class="card-icon">⚠️</div>
+            <div class="card-title">Adyar Estuary under threat — sewage & encroachment degrading a heritage asset</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">The same estuary cited as Highlight H5 is under active threat. Sewage discharge, garbage dumping, and buffer zone encroachment are documented in the Waterbodies Census. Without intervention, this ecological asset will deteriorate into a liability — worsening both floods and air quality.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">TN Waterbodies Census · Chennai Waterbodies dataset · Sewage Pumping Network (OpenCity.in)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L9</span>
+          <div class="card-icon-title">
+            <div class="card-icon">🗺</div>
+            <div class="card-title">Solid waste blind spots near the temple corridor and Luz market</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">The Solid Waste Management (SWM) dataset shows bin density and biogas centre coverage drops along the Kapaleeshwarar temple corridor and Luz market — highest footfall zones in the constituency. Street-level waste accumulation in these pockets directly contradicts Mylapore's civic reputation and is a recurring RWA complaint.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Chennai Solid Waste Management Data — bins, biogas centres, landfills (OpenCity.in)</span></div>
+      </div>
+    </div>
+
+    <div class="card ll">
+      <div class="card-stripe"></div>
+      <div class="card-inner">
+        <div class="card-top">
+          <span class="card-badge">L10</span>
+          <div class="card-icon-title">
+            <div class="card-icon">📣</div>
+            <div class="card-title">Manifestos filed for 2026 — but MLA accountability is unverified</div>
+          </div>
+        </div>
+        <p class="card-body" style="margin-top:4px;">Mylapore RWAs have filed detailed citizen manifestos covering floods, roads, the waterfront, and schools. But how many of these have been formally raised on the Assembly floor by the sitting MLA? The MLA Questions dataset tracks exactly this — and no one has cross-referenced it yet. Electoral promises are most powerful when they come with specific timelines and public reporting — for any candidate, from any party.</p>
+        <div class="data-tag"><span class="dt-label">Source</span><span class="dt-val">Citizen Manifestos for TN Elections 2026 · MLA Questions dataset (OpenCity.in)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verdict -->
+  <div class="verdict">
+    <div class="verdict-eyebrow">✦ The Verdict</div>
+    <h3>10 vs 10 — and the Score Says It All</h3>
+    <p>Mylapore's highlights and lowlights are not opposites — they are the <strong>same neighbourhood seen from two angles.</strong> The high civic engagement (H1) makes L10's accountability gap all the more urgent. The biodiversity asset (H5) makes L8's estuary degradation all the more tragic. The strong tax base (H8) makes L5's infrastructure deficit all the more unjustifiable.</p>
+    <p>The path to Rank 1 is mathematically clear: solve <strong>L1 (flood safety)</strong> and <strong>L2 (sewerage)</strong>, and Mylapore's overall score crosses 82 — enough to surpass Anna Nagar. Everything else — urban heat, last-mile gaps, school facilities — is the longer work that a genuinely engaged constituency is uniquely positioned to demand.</p>
+    <p>The question for 2026 is not whether Mylapore knows its problems. Its residents clearly do. The question is whether that knowledge becomes organised pressure on the people responsible for fixing it.</p>
+  </div>
+
+  <!-- ══════════ ASK YOUR CANDIDATE ══════════ -->
+
+  <div class="ayc-section">
+
+    <div class="ayc-banner">
+      <div class="ayc-election-tag">✦ 2026 Tamil Nadu Assembly Elections</div>
+      <h2>Ask Your <span>Candidate</span></h2>
+      <p>One month to elections. These are the asks citizens of Mylapore should put to every candidate who knocks on their door — grouped by who needs what most.</p>
+      <div class="ayc-timer">⏳ &nbsp;~30 days to polling day · Use your vote as a question</div>
+    </div>
+
+    <div class="ayc-tabs">
+      <button class="ayc-tab active" onclick="showTier('low', this)">
+        <span class="t-emoji">🏠</span>
+        <span class="t-label">Low Income</span>
+        <span class="t-sub">Fishing, daily wage, slum residents</span>
+      </button>
+      <button class="ayc-tab" onclick="showTier('mid', this)">
+        <span class="t-emoji">🏢</span>
+        <span class="t-label">Middle Income</span>
+        <span class="t-sub">Working families, small business</span>
+      </button>
+      <button class="ayc-tab" onclick="showTier('high', this)">
+        <span class="t-emoji">🏛</span>
+        <span class="t-label">Higher Income</span>
+        <span class="t-sub">Professionals, property owners</span>
+      </button>
+    </div>
+
+    <div class="ayc-content">
+
+      <!-- LOW INCOME TIER -->
+      <div class="tier-panel active" id="tier-low">
+        <p class="tier-intro low">
+          Mylapore contains within it two very different worlds. The fishing hamlets of <strong style="color:#F0EBE0">Nochikuppam, Santhome, and Foreshore Estate</strong> — home to over 1,500 families — exist alongside the affluent streets of Alwarpet. Slum clearance board resettlements in Muthaiyapuram, Ambedkar Bridge, and Pallakku Manager have displaced hundreds more. These are their asks. Backed by reporting from Citizen Matters, The Wire, The News Minute, and ground-level documentation.
+        </p>
+        <div class="ask-list">
+          <div class="ask-item low">
+            <div class="ask-num">1</div>
+            <div class="ask-body">
+              <div class="ask-title">Restore the Nochikuppam fishing community's right to their traditional livelihood space</div>
+              <div class="ask-desc">Over 1,500 fisher families in Nochikuppam have faced repeated eviction from the Marina Loop Road market under the pretext of beautification. Fisherwomen — the primary breadwinners — have lost their seashore stalls. The new market has poor footfall and unfair stall allotments. Ask: <em>Will you fight for in-situ livelihood spaces for fishing communities, and oppose displacement without consent?</em></div>
+              <span class="ask-tag urgent">Most urgent</span> <span class="ask-tag social">Livelihood</span>
+            </div>
+          </div>
+          <div class="ask-item low">
+            <div class="ask-num">2</div>
+            <div class="ask-body">
+              <div class="ask-title">Complete the pending Tamil Nadu Slum Clearance Board (TNSCB) housing for displaced tsunami & flood-affected families</div>
+              <div class="ask-desc">Only 628 of 7,320 originally planned TNSCB tenements were built after the 2004 tsunami. Around 400 families in Nochikuppam still live in temporary structures over two decades later. Ask: <em>What is your specific timeline and budget commitment to completing housing for all displaced families in Muthaiyapuram, Visalatchi Thottam, and Nochikuppam?</em></div>
+              <span class="ask-tag urgent">Long overdue</span> <span class="ask-tag infra">Housing</span>
+            </div>
+          </div>
+          <div class="ask-item low">
+            <div class="ask-num">3</div>
+            <div class="ask-body">
+              <div class="ask-title">Provide patta (land title deeds) to long-settled fisher families in coastal hamlets</div>
+              <div class="ask-desc">Residents of Nochikuppam have lived on their land for over 60 years, yet most have no title deeds. Without pattas, they cannot access bank loans, legal protections, or compensation. The Coastal Regulation Zone (CRZ) Notification recognises their rights — but the state has not acted. Ask: <em>Will you move a resolution in the Assembly to regularise and document land rights for all Mylapore coastal settlements?</em></div>
+              <span class="ask-tag policy">Land rights</span>
+            </div>
+          </div>
+          <div class="ask-item low">
+            <div class="ask-num">4</div>
+            <div class="ask-body">
+              <div class="ask-title">Free up GCC health sub-centres for evening hours and add a mobile health van for kuppam areas</div>
+              <div class="ask-desc">Despite 5 UPHCs in Mylapore, fishing hamlets and slum pockets have poor access due to distance and working hours. Fisherwomen who return from work by afternoon cannot access health centres that close at 4 PM. Ask: <em>Will you ensure at least one UPHC near Nochikuppam-Foreshore Estate has extended evening hours and a monthly mobile health camp?</em></div>
+              <span class="ask-tag social">Healthcare</span>
+            </div>
+          </div>
+          <div class="ask-item low">
+            <div class="ask-num">5</div>
+            <div class="ask-body">
+              <div class="ask-title">Build a proper bus terminus and last-mile connectivity for Foreshore Estate residents</div>
+              <div class="ask-desc">A bus terminus was promised for Mylapore in 2021 — residents report it remains incomplete. Foreshore Estate and coastal settlement residents continue to depend entirely on Metropolitan Transport Corporation (MTC) buses and share autos for last-mile connectivity. Ask: <em>What is the committed opening date for the Mylapore bus terminus, and will you add feeder routes directly connecting kuppam areas to metro stations?</em></div>
+              <span class="ask-tag infra">Transport</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="shared-asks">
+          <div class="shared-label">Also affects low income residents</div>
+          <div class="ask-list">
+            <div class="ask-item all">
+              <div class="ask-num">+</div>
+              <div class="ask-body">
+                <div class="ask-title">Desilt Buckingham Canal before every monsoon — with a publicly verifiable schedule</div>
+                <div class="ask-desc">Buckingham Canal flooding hits the most vulnerable hardest. Low-lying slum pockets flood first and drain last. Residents in Ambedkar Bridge area have been relocated at least once due to flooding. Ask: <em>Will you commit to a pre-monsoon desilting calendar published online, with ward-level completion certificates?</em></div>
+                <span class="ask-tag urgent">Urgent</span> <span class="ask-tag infra">Flood</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE INCOME TIER -->
+      <div class="tier-panel" id="tier-mid">
+        <p class="tier-intro mid">
+          The middle-income residents of Mylapore — apartment dwellers in Mandaveli, R.A. Puram, and Luz, shopkeepers on San Thome High Road, teachers and nurses, autorickshaw drivers and small traders — face a different set of daily frustrations. These are the people most directly disrupted by Metro Rail construction, interior road neglect, and post-flood disruption to livelihoods. Real issues from DT Next, Citizen Matters, and resident forums.
+        </p>
+        <div class="ask-list">
+          <div class="ask-item mid">
+            <div class="ask-num">1</div>
+            <div class="ask-body">
+              <div class="ask-title">Set a hard deadline for Metro Rail Phase 2 construction disruption — and compensate affected businesses</div>
+              <div class="ask-desc">Metro construction has closed several arterial roads in Mylapore causing severe traffic snarls. Small traders on Luz Church Road and shops near construction zones report 30–50% drop in footfall. Ask: <em>What is the exact completion date for Metro Rail works in Mylapore, and will you push for a business disruption compensation fund for affected shopkeepers?</em></div>
+              <span class="ask-tag urgent">Right now</span> <span class="ask-tag infra">Metro</span>
+            </div>
+          </div>
+          <div class="ask-item mid">
+            <div class="ask-num">2</div>
+            <div class="ask-body">
+              <div class="ask-title">Fix interior roads — the main roads are repaired but lanes in Mandaveli, Luz, and R.A. Puram interior remain broken</div>
+              <div class="ask-desc">Ganesh, an autorickshaw driver quoted in DT Next, summed it up clearly: "While main roads are maintained, several interior roads remain underdeveloped." This is a constant complaint in ward forums. Ask: <em>Can you publish a lane-by-lane road repair schedule for Mylapore's interior streets with completion timelines?</em></div>
+              <span class="ask-tag infra">Roads</span>
+            </div>
+          </div>
+          <div class="ask-item mid">
+            <div class="ask-num">3</div>
+            <div class="ask-body">
+              <div class="ask-title">Clear temple corridor encroachments — shops are blocking pathways and causing safety hazards</div>
+              <div class="ask-desc">Encroachments by shops around Kapaleeshwarar temple have become a major obstruction for residents and devotees, according to residents quoted in DT Next coverage. The issue has been raised repeatedly without action. Ask: <em>Will you initiate a formal encroachment audit around the temple corridor and give a 90-day clearance commitment with GCC enforcement?</em></div>
+              <span class="ask-tag policy">Civic Order</span>
+            </div>
+          </div>
+          <div class="ask-item mid">
+            <div class="ask-num">4</div>
+            <div class="ask-body">
+              <div class="ask-title">Upgrade government school infrastructure — digital classrooms, functional labs, and clean toilets</div>
+              <div class="ask-desc">Middle-income parents who send children to government schools (or who consider it) care about facility quality. PTR at 23:1 is excellent, but UDISE data flags gaps in labs and digital access. Ask: <em>Will you commit GCC Budget funds specifically for school facility upgrades in all government schools in Mylapore — with independent UDISE-verified reporting?</em></div>
+              <span class="ask-tag social">Education</span>
+            </div>
+          </div>
+          <div class="ask-item mid">
+            <div class="ask-num">5</div>
+            <div class="ask-body">
+              <div class="ask-title">Improve women's safety on the last-mile walk to metro — better lighting, footpaths, and feeder buses after 9 PM</div>
+              <div class="ask-desc">Women commuters from Mylapore's interior lanes to Alwarpet and Teynampet metro stations face broken footpaths, poor lighting, and no feeder buses after 9 PM. This is the most frequently raised transit issue in community forums. Ask: <em>Will you take up with CMRL and MTC the specific ask of 10 PM feeder frequency on Mylapore metro-connecting routes, and a lit pedestrian path audit?</em></div>
+              <span class="ask-tag social">Women's safety</span> <span class="ask-tag infra">Transport</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HIGH INCOME TIER -->
+      <div class="tier-panel" id="tier-high">
+        <p class="tier-intro high">
+          Mylapore's higher-income residents — professionals in Alwarpet and Raja Annamalaipuram, property owners in R.A. Puram, heritage homeowners, and the significant Non-Resident Indian (NRI) community with roots in the constituency — tend to engage through RWAs rather than at street level. Their asks are about governance quality, long-term asset protection, and environmental stewardship. Many are the same people filing citizen manifestos ahead of 2026.
+        </p>
+        <div class="ask-list">
+          <div class="ask-item high">
+            <div class="ask-num">1</div>
+            <div class="ask-body">
+              <div class="ask-title">Publish a ward-wise breakdown of how Mylapore's property tax contribution is spent by GCC</div>
+              <div class="ask-desc">Mylapore wards are among South Chennai's highest property tax contributors. Yet infrastructure quality — footpaths, drain maintenance, road surfacing — is widely felt to lag. Ask: <em>Will you file an Right to Information (RTI) or Assembly question demanding ward-by-ward expenditure data for Mylapore, and publish it openly on the constituency website?</em></div>
+              <span class="ask-tag policy">Fiscal accountability</span>
+            </div>
+          </div>
+          <div class="ask-item high">
+            <div class="ask-num">2</div>
+            <div class="ask-body">
+              <div class="ask-title">Fund and expedite the Mandaveli–Santhome relief sewer before the 2026 monsoon</div>
+              <div class="ask-desc">The 2020 floods produced a documented sewage-flood mix emergency in Mylapore. CMWSSB proposed a relief sewer for the Mandaveli–Santhome stretch but it remains unfunded in GCC Budget 2025-26. Ask: <em>Will you specifically push for this sewer project to be included in the revised GCC budget with a committed construction start date before July 2026?</em></div>
+              <span class="ask-tag urgent">Pre-monsoon 2026</span> <span class="ask-tag infra">Sewerage</span>
+            </div>
+          </div>
+          <div class="ask-item high">
+            <div class="ask-num">3</div>
+            <div class="ask-body">
+              <div class="ask-title">Restore the Adyar Estuary — stop sewage discharge, remove encroachments, and gazette a buffer zone</div>
+              <div class="ask-desc">The Adyar Estuary and Buckingham Canal are degraded by sewage discharge and garbage dumping documented in the Waterbodies Census. The Chennai Master Plan 2026 designates parts as conservation zones — but enforcement is absent. Ask: <em>Will you move a motion in the Assembly to formally gazette a 50-metre no-encroachment buffer along the Adyar in Mylapore, with CMWSSB enforcement?</em></div>
+              <span class="ask-tag green">Environment</span> <span class="ask-tag policy">Heritage</span>
+            </div>
+          </div>
+          <div class="ask-item high">
+            <div class="ask-num">4</div>
+            <div class="ask-body">
+              <div class="ask-title">Launch a Mylapore Heritage Street programme — pedestrianisation of select lanes near the temple</div>
+              <div class="ask-desc">Several streets near Kapaleeshwarar temple and the Mylapore tank are natural candidates for pedestrian priority — a move that would reduce encroachment pressure, improve tourism, and restore the heritage character. Ask: <em>Has this been included in your manifesto? If elected, will you allocate Smart City or state heritage funds for a pilot heritage lane pedestrianisation within 18 months?</em></div>
+              <span class="ask-tag green">Heritage</span> <span class="ask-tag policy">Urban design</span>
+            </div>
+          </div>
+          <div class="ask-item high">
+            <div class="ask-num">5</div>
+            <div class="ask-body">
+              <div class="ask-title">Make your 2026 manifesto commitments legally binding — with milestones and public reporting</div>
+              <div class="ask-desc">The sitting MLA made 16 promises in 2021. By his own account 90% are fulfilled — but residents dispute this on key items like the bus terminus and Buckingham Canal. The accountability gap (Lowlight L10) must close. Ask: <em>Will you publish a signed commitment document listing your 2026 promises with specific timelines, and agree to a biannual public report-back through Mylapore's RWAs?</em></div>
+              <span class="ask-tag policy">Accountability</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="ayc-cta">
+        <p>📢 &nbsp;<strong>How to use this section:</strong> Screenshot or print these asks. When a candidate comes to your door, your polling booth, or a public meeting — ask them directly. A candidate who can't answer these questions hasn't thought about your neighbourhood. A candidate who answers with specifics — timelines, budget lines, Assembly questions they'll file — deserves to be taken seriously. <strong>Your vote is your loudest ask.</strong></p>
+      </div>
+
+      <div style="
+        margin-top: 20px; padding: 20px 24px;
+        background: #1A1020;
+        border: 1px solid rgba(168,85,247,0.3);
+        border-left: 4px solid #A855F7;
+        border-radius: 0 8px 8px 0;
+      ">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <span style="font-size:16px;">📋</span>
+          <span style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#C084FC;">Where do these citizen asks come from?</span>
+        </div>
+        <p style="font-size:14px; color:#C0B8AC; line-height:1.85; margin:0 0 12px;">
+          The ground-level issues behind each ask were sourced from <strong style="color:#F0EBE0;">published journalism and field research</strong> — not invented. Specifically:
+        </p>
+        <ul style="font-size:13.5px; color:#C0B8AC; line-height:1.9; padding-left:20px; margin:0 0 14px;">
+          <li><strong style="color:#F0EBE0;">Citizen Matters</strong> (2021) — Mylapore constituency round-up, with direct quote from activist C R Balaji on Buckingham Canal and stormwater drain complaints</li>
+          <li><strong style="color:#F0EBE0;">DT Next</strong> (March 2026) — Pre-election ground report quoting residents Mohan (Metro disruption), Ganesh (interior roads), and Ramkumar (temple corridor encroachments) by name</li>
+          <li><strong style="color:#F0EBE0;">The Wire</strong> (November 2024) — Detailed investigative piece on the Nochikuppam fisherwomen eviction from Marina Loop Road</li>
+          <li><strong style="color:#F0EBE0;">The News Minute</strong> (April 2023) — Reporting on Nochikuppam residents protesting TNSCB (Tamil Nadu Slum Clearance Board) flat allotment irregularities</li>
+          <li><strong style="color:#F0EBE0;">ICSF &amp; SAGE Journals</strong> — Peer-reviewed academic research on land claims and displacement of Nochikuppam fishing community in Chennai</li>
+        </ul>
+        <p style="font-size:13px; color:#9A9088; line-height:1.8; margin:0; border-top:1px solid rgba(255,255,255,0.08); padding-top:12px;">
+          ⚠️ &nbsp;<strong style="color:#C084FC;">Important:</strong> The framing of these issues as specific electoral asks, and several asks under the Middle and Higher Income tabs, are <strong style="color:#F0EBE0;">inferences drawn from OpenCity.in datasets</strong> and general patterns — they are not direct resident quotes. This report covers <strong style="color:#F0EBE0;">civic and governance data only</strong> and does not claim to represent the full breadth of Mylapore residents' voices.
+        </p>
+      </div>
+
+    </div><!-- /ayc-content -->
+  </div><!-- /ayc-section -->
+
+</div>
+
+<div class="footer">
+  <strong>Author:</strong> This report was prepared by <strong style="color:var(--ink)">Dr. Sundararaman Chintamani</strong> for the Open City Data Jam, March 2026. &nbsp;·&nbsp;
+  <strong>Data sources:</strong> All figures are sample/illustrative data for the Open City Data Jam, March 2026 · UDISE+ 2023-24 & 2021-22 · GCC UPHCs & UCHCs map · Chennai Flood Inundation + Floods 2015 & 2020 · MTC Bus Shelters + CMRL Metro Usage · TN Assembly Elections 2021 + Voter Rolls Jan 2025 · Chennai Sewerage Capacity + CMWSSB GIS · Waterbodies + City Biodiversity Index · LST Geotiff May–Jun 2025 + NDVI 2025 · GCC Budget 2025-26 + Property Tax Collections · Citizen Manifestos for TN Elections 2026 · SWM dataset · Chennai Parks dataset · <em>All composite scores (0–100) are illustrative indices.</em>
+</div>
+
+<script>
+function showTier(tier, btn) {
+  document.querySelectorAll('.tier-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ayc-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tier-' + tier).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
